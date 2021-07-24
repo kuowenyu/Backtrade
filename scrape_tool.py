@@ -109,32 +109,32 @@ class IndexScraper:
                 self.get_other(symbol)
 
                 # Process bars
-                # filename = 'data/' + self.index_ticker + '/{}.txt'.format(symbol)
-                #
-                # f = open(filename, 'w+')
-                # f.write('Date,Open,High,Low,Close,Volume,OpenInterest\n')
-                # # print(data[symbol])
-                #
-                # for bar in data[symbol]:
-                #     t = datetime.fromtimestamp(bar['t'])
-                #     day = t.strftime('%Y-%m-%d')
-                #
-                #     line = '{},{},{},{},{},{},{}\n'.format(day, bar['o'], bar['h'], bar['l'], bar['c'], bar['v'], 0.00)
-                #     f.write(line)
-                #
-                # f.close()
+                filename = 'data/' + self.index_ticker + '/{}.txt'.format(symbol)
+
+                f = open(filename, 'w+')
+                f.write('Date,Open,High,Low,Close,Volume,OpenInterest\n')
+                # print(data[symbol])
+
+                for bar in data[symbol]:
+                    t = datetime.fromtimestamp(bar['t'])
+                    day = t.strftime('%Y-%m-%d')
+
+                    line = '{},{},{},{},{},{},{}\n'.format(day, bar['o'], bar['h'], bar['l'], bar['c'], bar['v'], 0.00)
+                    f.write(line)
+
+                f.close()
 
         print(self.index_ticker + ' is loaded')
 
     def get_other(self, ticker):
         # Process dividends
-        # self.get_dividends(ticker)
+        self.get_dividends(ticker)
 
         # Process earnings
         self.get_earnings(ticker)
 
         # Process holder
-        # self.get_holders(ticker)
+        self.get_holders(ticker)
 
 
     def read_raw_data(self, ticker):
